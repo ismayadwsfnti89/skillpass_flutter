@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(100),
           child: Form(
             key: _formKey,
             child: Column(
@@ -153,23 +153,37 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
+                
+                // Jarak diperbesar biar tombol agak ke tengah bawah
+                const SizedBox(height: 70), 
+                
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
+                    // GANTI WARNA JADI BIRU & TEKS PUTIH
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     onPressed: isLoading ? null : login,
                     child: isLoading
                         ? const SizedBox(
-                            width: 22,
-                            height: 22,
+                            width: 24, // Ukuran spinner dibenerin
+                            height: 24,
                             child: CircularProgressIndicator(
-                              strokeWidth: 2,
+                              strokeWidth: 2.5,
                               valueColor:
                                   AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text('LOGIN'),
+                        : const Text(
+                            'LOGIN',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                   ),
                 ),
                 TextButton(

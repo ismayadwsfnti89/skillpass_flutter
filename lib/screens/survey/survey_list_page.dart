@@ -143,7 +143,8 @@ class _SurveyListPageState extends State<SurveyListPage> {
         onRefresh: fetchSurveys,
         child: buildBody(),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: surveys.isEmpty ? null : //jika data kosong tambah survey tidak ada dan jika ada tambah survey tampil
+      FloatingActionButton.extended(
         onPressed: openAddSurvey,
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
@@ -218,7 +219,7 @@ class _SurveyListPageState extends State<SurveyListPage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Color(0xFF64748B))),
               const SizedBox(height: 20),
-              ElevatedButton.icon(
+                 ElevatedButton.icon(
                 onPressed: openAddSurvey,
                 icon: const Icon(Icons.add),
                 label: const Text('Tambah Survey'),

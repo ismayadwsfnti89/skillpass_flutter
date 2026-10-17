@@ -297,6 +297,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: AppBar(
         title: const Text('Profile'),
+        // Cuma ada 1 tombol home di sini (pojok kanan atas)
         actions: [
           IconButton(
             icon: const Icon(Icons.home),
@@ -313,26 +314,7 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Tombol kembali ke Beranda
-                // Tombol kembali (paling atas)
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton.icon(
-                    onPressed: () => context.go(AppRoutes.dashboard),
-                    icon: const Icon(Icons.home),
-                    label: const Text('Kembali ke Beranda'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.blue,
-                      side: const BorderSide(color: Colors.blue),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const SizedBox(height: 16),
+                // Tombol Home yang panjang udah DIHAPUS dari sini biar ga dobel
 
                 if (isLoading)
                   const Padding(

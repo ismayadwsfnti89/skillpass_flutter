@@ -117,83 +117,142 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                buildTextField(
-                  controller: nameController,
-                  label: 'Nama Lengkap',
-                  icon: Icons.person,
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Register'),
+      backgroundColor: Colors.blueAccent,
+      foregroundColor: Colors.white,
+      elevation: 0,
+    ),
+    body: SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(100), // 
+        child: Form( // 
+          key: _formKey,
+          child: Column(
+            children: [
+              buildTextField(
+                controller: nameController,
+                label: 'Nama Lengkap',
+                icon: Icons.person,
+              ),
+              DropdownButtonFormField<String>(
+                value: gender,
+                decoration: const InputDecoration(
+                  labelText: 'Jenis Kelamin',
+                  prefixIcon: Icon(Icons.wc),
+                  border: OutlineInputBorder(),
                 ),
-                DropdownButtonFormField<String>(
-                  value: gender,
-                  decoration: const InputDecoration(
-                    labelText: 'Jenis Kelamin',
-                    prefixIcon: Icon(Icons.wc),
-                    border: OutlineInputBorder(),
+                items: const [
+                  DropdownMenuItem(value: 'L', child: Text('Laki-laki')),
+                  DropdownMenuItem(value: 'P', child: Text('Perempuan')),
+                ],
+                onChanged: (v) => setState(() => gender = v),
+                validator: (v) => v == null ? 'Jenis kelamin wajib dipilih' : null,
+              ),
+              const SizedBox(height: 16),
+              buildTextField(
+                controller: emailController,
+                label: 'Email',
+                icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
+              ),
+              buildTextField(
+                controller: phoneController,
+                label: 'Nomor WhatsApp',
+                icon: Icons.phone,
+                keyboardType: TextInputType.phone,
+              ),
+              buildTextField(
+                controller: passwordController,
+                label: 'Password',
+                icon: Icons.lock,
+                obscure: true,
+              ),
+              const SizedBox(height: 50),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 51, 128, 230),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                  items: const [
-                    DropdownMenuItem(value: 'L', child: Text('Laki-laki')),
-                    DropdownMenuItem(value: 'P', child: Text('Perempuan')),
-                  ],
-                  onChanged: (v) => setState(() => gender = v),
-                  validator: (v) =>
-                      v == null ? 'Jenis kelamin wajib dipilih' : null,
+                  onPressed: isLoading ? null : register,
+                  child: isLoading
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.5,
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        )
+                      : const Text(
+                          'REGISTER',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                 ),
-                const SizedBox(height: 16),
-                buildTextField(
-                  controller: emailController,
-                  label: 'Email',
-                  icon: Icons.email,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                buildTextField(
-                  controller: phoneController,
-                  label: 'Nomor WhatsApp',
-                  icon: Icons.phone,
-                  keyboardType: TextInputType.phone,
-                ),
-                buildTextField(
-                  controller: passwordController,
-                  label: 'Password',
-                  icon: Icons.lock,
-                  obscure: true,
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: isLoading ? null : register,
-                    child: isLoading
-                        ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor:
-                                  AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Text('REGISTER'),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () => context.go(AppRoutes.login),
-                  child: const Text('Sudah punya akun? Login'),
-                ),
-              ],
-            ),
+              ),
+              TextButton(
+                onPressed: () => context.go(AppRoutes.login),
+                child: const Text('Sudah punya akun? Login'),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
+}
+
+                
+//                 // Jarak tombolnya agak ke bawah/tengah
+//                 const SizedBox(height: 50),
+                
+//                 SizedBox(
+//                   width: double.infinity,
+//                   height: 50,
+//                   child: ElevatedButton(
+//                     //  WARNA btn login
+//                     style: ElevatedButton.styleFrom(
+//                       backgroundColor: const Color.fromARGB(255, 51, 128, 230),
+//                       foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+//                       shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(8),
+//                       ),
+//                     ),
+//                     onPressed: isLoading ? null : register,
+//                     child: isLoading
+//                         ? const SizedBox(
+//                             width: 24, // Ukuran spinner dibenerin
+//                             height: 24,
+//                             child: CircularProgressIndicator(
+//                               strokeWidth: 2.5,
+//                               valueColor:
+//                                   AlwaysStoppedAnimation<Color>(Colors.white),
+//                             ),
+//                           )
+//                         : const Text(
+//                             'REGISTER',
+//                             style: TextStyle(fontWeight: FontWeight.bold),
+//                           ),
+//                   ),
+//                 ),
+//                 TextButton(
+//                   onPressed: () => context.go(AppRoutes.login),
+//                   child: const Text('Sudah punya akun? Login'),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
